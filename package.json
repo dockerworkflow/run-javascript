@@ -1,5 +1,16 @@
 {
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com:dockerworkflow/run-javascript"
+  },
+  "private": true,
   "dependencies": {
-    "builtin-modules": "^1.1.1"
+    "bluebird": "^3.5.1",
+    "builtin-modules": "^1.1.1",
+    "moment": "^2.19.1",
+    "moment-timezone": "^0.5.13",
+    "nodemailer": "^4.2.0",
+    "request": "^2.83.0"
   }
 }
