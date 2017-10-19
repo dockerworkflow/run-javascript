@@ -22,6 +22,7 @@ let script = process.env.SCRIPT;
 
 fs.writeFileSync("./script.js", script);
 
+let modules = [];
 const ignoreInstallationForModules = builtinModules;
 const matches = requireRegexp.execAll(script);
 matches.forEach(match => {
@@ -30,9 +31,15 @@ matches.forEach(match => {
 
   if (ignoreInstallationForModules.indexOf(moduleName) != -1) return;
 
-  console.log(`installing dependency ${moduleName}`);
-  const result = execSync(`npm install ${moduleName} > /dev/null`);
-  // console.log(`installed ${moduleName}\nlogs: ${result}`);
+  modules.push(moduleName);
 });
+
+if (modules.length > 0) {
+  console.log(`installing dependencies ${modules.join(", ")}`);
+  const result = execSync(`npm install ${modules.join(" ")}`, {
+    stdio: [null, null, "pipe"]
+  });
+  // console.log(`installed ${moduleName}\nlogs: ${result}`);
+}
 
 require("./script.js");
